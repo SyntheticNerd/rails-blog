@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <h1>
+      Categories <% if logged_in? && (current_user.admin?) %>
+        <%= link_to 'Create Category', new_category_path, class: "btn btn-primary" %>
+      <% end %>
+    </h1>
+  </div>
+  <div class="row">
+    <div class="flickr_pagination">
+      <%= will_paginate @categories, :container => false %>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th># of Articles</th>
+          <% if logged_in? && (current_user.admin?) %>
+            <th>Actions</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr>
+            <td><%= link_to category.name, category, class: "btn btn-primary" %></td>
+            <td><%= pluralize(category.articles.count, "category") %></td>
+            <% if logged_in? && (current_user.admin?) %>
+              <td>
+                <%= link_to 'Delete', category, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="flickr_pagination">
+      <%= will_paginate @categories, :container => false %>
+    </div>
+  </div>
+</div>

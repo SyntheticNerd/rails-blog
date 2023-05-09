@@ -1,0 +1,23 @@
+<div class="container margin-top">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="my-4"><%= @article.title %></h1>
+      <% if @article.categories.any? %>
+        <div class="row row-cols-6 mb-4">
+          <%= render @article.categories %>
+        </div>
+      <% end %>
+      <p><%= @article.description %></p>
+      <hr>
+      <div class="row p-2">
+        <div class="d-flex justify-content-end">By <strong class="d-block ms-1"><%= @article.user.username %></strong></div>
+      </div>
+      <% if logged_in? && @article.user == current_user || current_user.admin? %>
+        <div class="d-flex justify-content-end">
+          <%= link_to 'Edit', edit_article_path(@article), class: "btn btn-primary mx-2" %>
+          <%= link_to 'Delete', @article, data: {  turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger mx-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

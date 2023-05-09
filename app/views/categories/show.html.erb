@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <div class="row">
+    <h1>
+      <%= @category.name %>
+        <% if logged_in? && current_user.admin %>
+      <%= link_to 'Edit', edit_category_path(@category), class: "btn btn-warning" %>
+    <% end %>
+    </h1>
+
+  </div>
+  <div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+  </div>
+  <%= render 'articles/articles' %>
+  <div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+  </div>
+</div>

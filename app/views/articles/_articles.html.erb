@@ -1,0 +1,32 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Author</th>
+      <th>Categories</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.description %></td>
+        <td><%= link_to article.user.username, user_path(article.user) %></td>
+        <td>
+          <% if article.categories.any? %>
+              <%= render article.categories %>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Show', article, class: "btn btn-primary" %>
+          <% if logged_in? && (article.user == current_user || current_user.admin?) %>
+            <%= link_to 'Edit', edit_article_path(article), class: "btn btn-warning" %>
+            <%= link_to 'Delete', article, data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,8 @@
+<%= render 'shared/errors', obj: @category %>
+<%= form_with(model: @category, local: true, data: { turbo: false }) do |form| %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control", placeholder: "Enter a Name" %>
+  </div>
+  <%= form.submit class: "btn btn-primary" %>
+<% end %>

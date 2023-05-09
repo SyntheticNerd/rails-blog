@@ -1,0 +1,15 @@
+<div class="container">
+  <h1><%= @user.username %>'s Profile</h1>
+  <% if logged_in? && @user == current_user %>
+    <%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-warning" %>
+    <%= link_to "Delete Profile", @user, data: { turbo_method: :delete, turbo_confirm: "Are you sure, this will delete all articles associated with you account?"}, class: "btn btn-danger" %>
+  <% end %>
+  <h3>Articles</h3>
+  <div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+  </div>
+  <%= render 'articles/articles' %>
+  <div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+  </div>
+</div>

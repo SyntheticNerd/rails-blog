@@ -1,0 +1,17 @@
+<div class="centered">
+  <div class="login-form">
+    <%= form_with(scope: :session, url: login_path, method: "post", data: { turbo: false }) do |f| %>
+      <h2>Login</h2>
+      <div class="form-group">
+        <%= f.label :email  %>
+        <%= f.email_field :email, class: "form-control", placeholder: "Enter Email" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control", placeholder: "Enter Password" %>
+      </div>
+      <%= f.submit 'Login', class: "btn btn-primary mr-2" %>
+      <a href="#">Forgot password?</a>
+    <% end %>
+  </div>
+</div>

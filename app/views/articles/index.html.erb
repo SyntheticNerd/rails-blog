@@ -1,0 +1,15 @@
+<div class="container margin-top">
+  <h1>Articles listing page <% if logged_in? %>
+      <%= link_to new_article_path, class: "btn btn-primary" do %>
+        <i class="bi bi-plus-circle"></i> New Article
+      <% end %>
+    <% end %>
+  </h1>
+  <div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+  </div>
+  <%= render 'articles' %>
+  <div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+  </div>
+</div>

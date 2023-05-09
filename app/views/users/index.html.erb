@@ -1,0 +1,37 @@
+<div class="container margin-top">
+  <h1>Blog Members</h1>
+  <div class="flickr_pagination">
+    <%= will_paginate @users, :container => false %>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th># of Articles</th>
+        <th>Joined</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= link_to user.username, user %></td>
+          <td><%= user.email %></td>
+          <td><%= user.articles.length %></td>
+          <td><small><%= time_ago_in_words(user.created_at) %></small></td>
+          <td>
+            <%= link_to "View Profile", user, class: "btn btn-primary" %>
+            <% if logged_in? && (user == current_user || current_user.admin?) %>
+              <%= link_to 'Edit', edit_user_path(user), class: "btn btn-warning" %>
+              <%= link_to "Delete", user, data: { turbo_method: :delete, turbo_confirm: "Are you sure, this will delete all articles associated with this account?"}, class: "btn btn-danger" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="flickr_pagination">
+    <%= will_paginate @users, :container => false %>
+  </div>
+</div>
